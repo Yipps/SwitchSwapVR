@@ -648,13 +648,34 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   endEvents:
     m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onWinEvents:
+    m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: 
+      - m_Target: {fileID: 1936358823}
+        m_MethodName: CreateWinParticles
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnLoseEvents:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1936358823}
+        m_MethodName: CreateLoseParticles
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -664,7 +685,13 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   gameStateStart: 0
   customGameDuration: 4
+  customBeginDuration: 3
+  customEndDuration: 3
   rod: {fileID: 1886393492}
+  winparticlesPrefab: {fileID: 3466417232309585254, guid: 4a222097e73ad2142984e71d005bf4a1,
+    type: 3}
+  loseparticlesPrefab: {fileID: 1291910684894236397, guid: bd4075fba9a6d0f47bcfff74713f37d3,
+    type: 3}
 --- !u!4 &1936358824
 Transform:
   m_ObjectHideFlags: 0
