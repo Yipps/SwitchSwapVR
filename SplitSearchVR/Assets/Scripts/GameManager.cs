@@ -23,6 +23,8 @@ public class GameManager : Singleton<GameManager>{
 	public UnityEvent gameEvent;
 	public UnityEvent endEvents;
     
+
+    bool gameIsComplete;
 	/*
 	bool currentState = false;
 	bool judgingState = false;
@@ -30,6 +32,7 @@ public class GameManager : Singleton<GameManager>{
 
     void Start(){
         Debug.Log("Game is loaded");
+        gameIsComplete = false;
         //OnIntroBegin();
     }
 
@@ -53,16 +56,22 @@ public class GameManager : Singleton<GameManager>{
     }
 
     public void OnGameSuccess(float outroDuration = 3.0f){
-    	OnOutroBegin();
-    	Debug.Log("Game ends early: you win");
-    	Invoke("OnOutroEnd",outroDuration);
+        if(!gameIsComplete){
+            gameIsComplete = true;
+        	OnOutroBegin();
+        	Debug.Log("Game ends early: you win");
+        	Invoke("OnOutroEnd",outroDuration);
+        }
 
     }
 
     public void OnGameFailure(float outroDuration = 3.0f){
-    	OnOutroBegin();
-    	Debug.Log("Game ends early: you lose");
-    	Invoke("OnOutroEnd",outroDuration);
+        if(!gameIsComplete){
+            gameIsComplete = true;
+        	OnOutroBegin();
+        	Debug.Log("Game ends early: you lose");
+        	Invoke("OnOutroEnd",outroDuration);
+        }
 
     }
 
@@ -93,6 +102,7 @@ public class GameManager : Singleton<GameManager>{
     		yield return null;
     	}
     	Debug.Log("Game ends on time;");
+        gameIsComplete = true;
     	if(winConditionMet){
     		OnGameSuccess();	
     		Debug.Log("You win");
