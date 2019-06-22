@@ -7,13 +7,11 @@ using TMPro;
 
 public class GameManager : Singleton<GameManager>{
 
-    enum GameState{minigame,hub};
-
 	public TextMeshProUGUI countdouwnTimerText;
 
 	public float timeToBegin = 3.0f;
 	public float timeToEndGame = 3.0f;
-	public string hubName = "Minigame";
+	public string hubName;
 
 	public string hint;
 
@@ -31,16 +29,6 @@ public class GameManager : Singleton<GameManager>{
 	bool currentState = false;
 	bool judgingState = false;
 	*/
-
-    [Header ("Game Values")]
-
-    public int maxLives = 3;
-    public int currentLives;
-
-    [Header("Swap Components")]
-
-    public int numberOfPlayers;
-    int[] playerScore;
 
     void Start(){
         Debug.Log("Game is loaded");
@@ -93,8 +81,8 @@ public class GameManager : Singleton<GameManager>{
 
     public void OnOutroEnd(){
     	//Time.timeScale = 1.0f;
+    	//SceneManager.LoadScene(hubName);
     	Debug.Log("At this point the scene would end");
-    	SceneManager.LoadScene(hubName);
     }
 
     void OnTimeRunsOut(bool winCondition){
