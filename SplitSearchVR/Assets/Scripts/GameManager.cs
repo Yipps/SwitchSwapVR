@@ -102,7 +102,6 @@ public class GameManager : Singleton<GameManager>{
     		yield return null;
     	}
     	Debug.Log("Game ends on time;");
-        gameIsComplete = true;
     	if(winConditionMet){
     		OnGameSuccess();	
     		Debug.Log("You win");
