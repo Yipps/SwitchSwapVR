@@ -7,11 +7,13 @@ using TMPro;
 
 public class GameManager : Singleton<GameManager>{
 
+    enum GameState{minigame,hub};
+
 	public TextMeshProUGUI countdouwnTimerText;
 
 	public float timeToBegin = 3.0f;
 	public float timeToEndGame = 3.0f;
-	public string hubName;
+	public string hubName = "Minigame";
 
 	public string hint;
 
@@ -23,13 +25,26 @@ public class GameManager : Singleton<GameManager>{
 	public UnityEvent gameEvent;
 	public UnityEvent endEvents;
     
+
+    bool gameIsComplete;
 	/*
 	bool currentState = false;
 	bool judgingState = false;
 	*/
 
+    [Header ("Game Values")]
+
+    public int maxLives = 3;
+    public int currentLives;
+
+    [Header("Swap Components")]
+
+    public int numberOfPlayers;
+    int[] playerScore;
+
     void Start(){
         Debug.Log("Game is loaded");
+        gameIsComplete = false;
         //OnIntroBegin();
     }
 
@@ -53,16 +68,22 @@ public class GameManager : Singleton<GameManager>{
     }
 
     public void OnGameSuccess(float outroDuration = 3.0f){
-    	OnOutroBegin();
-    	Debug.Log("Game ends early: you win");
-    	Invoke("OnOutroEnd",outroDuration);
+        if(!gameIsComplete){
+            gameIsComplete = true;
+        	OnOutroBegin();
+        	Debug.Log("Game ends early: you win");
+        	Invoke("OnOutroEnd",outroDuration);
+        }
 
     }
 
     public void OnGameFailure(float outroDuration = 3.0f){
-    	OnOutroBegin();
-    	Debug.Log("Game ends early: you lose");
-    	Invoke("OnOutroEnd",outroDuration);
+        if(!gameIsComplete){
+            gameIsComplete = true;
+        	OnOutroBegin();
+        	Debug.Log("Game ends early: you lose");
+        	Invoke("OnOutroEnd",outroDuration);
+        }
 
     }
 
@@ -72,8 +93,8 @@ public class GameManager : Singleton<GameManager>{
 
     public void OnOutroEnd(){
     	//Time.timeScale = 1.0f;
-    	//SceneManager.LoadScene(hubName);
     	Debug.Log("At this point the scene would end");
+    	SceneManager.LoadScene(hubName);
     }
 
     void OnTimeRunsOut(bool winCondition){
