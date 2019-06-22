@@ -7,6 +7,9 @@ public class DropGame : MicroScene{
     
     public GameObject rod;
 
+    public GameObject winparticlesPrefab;
+    public GameObject loseparticlesPrefab;
+
     // Update is called once per frame
     void Update()
     {
@@ -26,5 +29,11 @@ public class DropGame : MicroScene{
     	GameManager.Instance.SetWinCondition(false);
     }
 
+    public void CreateWinParticles(){
+        Instantiate(winparticlesPrefab, this.transform.position,Quaternion.identity);
+    }
+    public void CreateLoseParticles(){
+        Instantiate(loseparticlesPrefab, this.transform.position,Quaternion.identity);
+    }
 
 }
