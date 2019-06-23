@@ -94,8 +94,8 @@ public class ClawMachine : MonoBehaviour
 
     float Remap(float f)
     {
-
-        float remappedValue = f / 1 * 10 - 5;
+        f = Mathf.Clamp(f, -0.5f, 5f);
+        float remappedValue = (f + 0.5f) * (8) - 4;
         return f;
     }
 }
