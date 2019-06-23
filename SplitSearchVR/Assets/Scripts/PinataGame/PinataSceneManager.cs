@@ -6,7 +6,7 @@ public class PinataSceneManager : MicroScene
 {
     public void OnSuccess()
     {
-        GameManager.Instance.OnGameSuccess();
+        GameManager.Instance.SetWinCondition(true);
     }
 
 

@@ -12,6 +12,7 @@ public class ClawMachine : MonoBehaviour
     private float xMax = 4;
     private float zMax = 4;
 
+    private Vector3 controllerOrigin;
 
     public bool hasGrabbed;
 
@@ -34,22 +35,27 @@ public class ClawMachine : MonoBehaviour
             DropCrane();
         }
 
-        float remapx = Remap(movingInput.transform.position.x);
-        float remapz = Remap(movingInput.transform.position.z);
-
-        print("Remapped x: " + remapx);
-        print("Remapped z: " + remapz);
-
-        Vector3 relativeDist = new Vector3(remapx, transform.position.y, remapz);
-
-        transform.position = Vector3.Slerp(transform.position, relativeDist, Time.deltaTime);
+        
     }
 
     IEnumerator DropCraneCoroutine()
     {
         while (true)
         {
-            transform.Translate(Vector3.down * Time.deltaTime * dropSpeed);
+            float distX = (movingInput.transform.position.x - controllerOrigin.x);
+            float distZ = (movingInput.transform.position.z - controllerOrigin.z);
+
+            float remapx = Remap(distX);
+            float remapz = Remap(distZ);
+
+            print("Input X: " + distX + "|| Remapped x: " + remapx);
+            print("Input Z: " + distZ + "|| Remapped z: " + remapz);
+
+            Vector3 relativeDist = new Vector3(remapx, transform.position.y, remapz);
+
+            transform.position = Vector3.Slerp(transform.position, relativeDist, Time.deltaTime);
+
+            //transform.Translate(Vector3.down * Time.deltaTime * dropSpeed);
             yield return new WaitForEndOfFrame();
         }
     }
@@ -75,6 +81,7 @@ public class ClawMachine : MonoBehaviour
     public void DropCrane()
     {
         StartCoroutine(DropCraneCoroutine());
+        controllerOrigin = movingInput.transform.position;
 
     }
 
@@ -87,6 +94,10 @@ public class ClawMachine : MonoBehaviour
     {
         while (true)
         {
+
+            
+
+
             transform.Translate(Vector3.up * Time.deltaTime * dropSpeed);
             yield return new WaitForEndOfFrame();
         }
@@ -94,8 +105,9 @@ public class ClawMachine : MonoBehaviour
 
     float Remap(float f)
     {
-        f = Mathf.Clamp(f, -0.5f, 5f);
+        f = Mathf.Clamp(f, -0.5f, 0.5f);
         float remappedValue = (f + 0.5f) * (8) - 4;
-        return f;
+        return remappedValue;
     }
+
 }
