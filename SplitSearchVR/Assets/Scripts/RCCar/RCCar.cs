@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class RCCar : MonoBehaviour
 {
+    public GameObject car;
+    public Transform _RightHand;
     // Start is called before the first frame update
     void Start()
     {
@@ -11,8 +13,16 @@ public class RCCar : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        OVRInput.FixedUpdate();
+        Vector3 fwd = _RightHand.TransformDirection(Vector3.forward);
+
+        if (OVRInput.Get(OVRInput.RawButton.RIndexTrigger))
+        {
+
+         //   car.transform.position();
+
+        }
     }
 }

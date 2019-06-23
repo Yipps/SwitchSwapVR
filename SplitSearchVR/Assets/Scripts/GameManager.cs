@@ -61,7 +61,7 @@ public class GameManager : Singleton<GameManager>{
         //Singleton already takes care of this
         //DontDestroyOnLoad(this);
         //for(int i = 0; i < )
-        Debug.Log("I have :"  + minigameNames.Length + " Games registered");
+        //Debug.Log("I have :"  + minigameNames.Length + " Games registered");
     }
 
     void Update(){
