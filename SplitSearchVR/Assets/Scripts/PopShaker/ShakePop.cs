@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class ShakePop : MonoBehaviour
 {
@@ -25,6 +27,9 @@ public class ShakePop : MonoBehaviour
     //Last frame's soda position
     private Vector3 LastSodaPosition;
 
+    public GameObject progressBar;
+    public TMPro.TextMeshProUGUI _percentComplete;
+
     public ParticleSystem success;
     public ParticleSystem failure;
 
@@ -33,13 +38,17 @@ public class ShakePop : MonoBehaviour
     {
         success.Pause();
         failure.Pause();
+
+        OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.RTouch);
     }
 
     // Update is called once per frame
     void Update()
     {
+
         //Change in soda positions between last frame and current frame
         deltaSodaPosition = LastSodaPosition - _Hand.transform.position;
+        _percentComplete.text = (totalShakeValue / 5) + "%";
 
         //Debugging console log to verify totalshakevalue
         print("Total shjake value: " + totalShakeValue);
@@ -50,6 +59,7 @@ public class ShakePop : MonoBehaviour
         {
             print("Now we're shaking!");
             totalShakeValue += shakeIncreaseAmount;
+            progressBar.transform.localScale += new Vector3(.01f, 0, 0);
         }
 
         //Console debug to verify magnitude is being registered
