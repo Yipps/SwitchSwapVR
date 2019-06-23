@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Events;
 
 public class MicroScene : MonoBehaviour{
@@ -30,6 +31,8 @@ public class MicroScene : MonoBehaviour{
     public float customBeginDuration = 3.0f;
     public float customEndDuration = 3.0f;
 
+
+    public Text timerText;
     void Awake(){
 
         //Setting the custom values to the manager
@@ -47,6 +50,9 @@ public class MicroScene : MonoBehaviour{
         //GameManager.Instance.SetGameEndDuration(customEndDuration);
         //GameManager.Instance.SetGameBeginDuration(customBeginDuration);
         GameManager.Instance.OnIntroBegin();
+        if(timerText != null){
+            GameManager.Instance.timerText = timerText;
+        }
     }
 
     // Update is called once per frame

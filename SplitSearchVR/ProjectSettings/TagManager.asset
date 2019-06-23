@@ -8,6 +8,8 @@ TagManager:
   - end
   - Box
   - Rod
+  - ExcludeTeleport
+  - TimerText
   layers:
   - Default
   - TransparentFX

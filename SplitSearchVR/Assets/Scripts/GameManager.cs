@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using TMPro;
@@ -43,11 +44,16 @@ public class GameManager : Singleton<GameManager>{
     public GameState currentGameState;
     public int minigamesPlayed = 0;
 
+    public Text timerText;
+
     [Header("Minigames ")]
 
     //Filled from hubmanager
     public string[] minigameNames;
     List<string> minigamesRemaining;
+
+    float displayTime;
+    bool timerIsOn;
 
 	/*
     public int numberOfPlayers;
@@ -66,7 +72,16 @@ public class GameManager : Singleton<GameManager>{
     }
 
     void Update(){
-        
+        if(timerIsOn && timerText != null){
+            timerText.text = "" + displayTime.ToString("0.00");
+            displayTime -= Time.deltaTime;
+            if(displayTime <= 0){
+                timerIsOn = false;
+            }else{
+                //timerText.text = "";
+
+            }
+        }
     }
 
     public void SetGameDuration(float newGameDuration){
@@ -89,6 +104,15 @@ public class GameManager : Singleton<GameManager>{
     	Invoke("OnGameStart",timeToBegin);
     	currentGameState = GameState.minigame;
         gameIsComplete = false;
+        displayTime = timeToBegin;
+        if(timerText != null){
+            Debug.Log("NAME:" + timerText.gameObject.transform.name);
+            timerText.text = ""+timeToBegin;
+        }else{
+            Debug.Log("timer is null");
+            timerText = GameObject.FindWithTag("TimerText").GetComponent<Text>();
+        }
+        timerIsOn = true;
     }
 
     void OnGameStart(){
