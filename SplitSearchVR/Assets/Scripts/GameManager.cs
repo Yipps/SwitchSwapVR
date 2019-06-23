@@ -39,14 +39,27 @@ public class GameManager : Singleton<GameManager>{
 
     public int maxLives = 3;
     public int currentLives;
+    public int completedMinigames;
+    GameState currentGameState;
 
-    [Header("Swap Components")]
+    [Header("Minigames ")]
 
+    //Filled from hubmanager
+    public string[] minigameNames;
+    List<string> minigamesRemaining;
+
+	/*
     public int numberOfPlayers;
     int[] playerScore;
+    */
+
+
 
     void Start(){
         //OnIntroBegin();
+        currentGameState = GameState.hub;
+        //Singleton already takes care of this
+        //DontDestroyOnLoad(this);
     }
 
     void Update(){
@@ -67,8 +80,8 @@ public class GameManager : Singleton<GameManager>{
      
 
     public void OnIntroBegin(){
-    	Debug.Log("Calling On intro begin func");
     	Invoke("OnGameStart",timeToBegin);
+    	currentGameState = GameState.minigame;
     }
 
     void OnGameStart(){
@@ -108,6 +121,8 @@ public class GameManager : Singleton<GameManager>{
     public void OnOutroEnd(){
     	//Time.timeScale = 1.0f;
     	Debug.Log("At this point the scene would end");
+
+    	currentGameState = GameState.hub;
     	SceneManager.LoadScene(hubName);
     }
 
@@ -145,6 +160,24 @@ public class GameManager : Singleton<GameManager>{
     	}else{
     		OnGameFailure();	
     	}
+    }
+
+    void FillList(){
+    	minigamesRemaining = new List<string>();
+    	for(int i = 0; i < minigameNames.Length; i++){
+    		minigamesRemaining.Add(minigameNames[i]);
+    	}
+    }
+
+    public string ChooseARandomGame(){
+    	if(minigamesRemaining.Count <= 0){
+    		FillList();
+    	}
+    	int randomIndex = Random.Range(0,minigamesRemaining.Count);
+    	string randomGame = minigamesRemaining[randomIndex];
+    	minigamesRemaining.RemoveAt(randomIndex);
+
+    	return randomGame;
     }
 
 }
