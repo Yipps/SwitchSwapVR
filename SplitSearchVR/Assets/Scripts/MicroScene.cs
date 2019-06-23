@@ -39,9 +39,13 @@ public class MicroScene : MonoBehaviour{
         GameManager.Instance.onWinEvents = onWinEvents;
         GameManager.Instance.OnLoseEvents = OnLoseEvents;
         GameManager.Instance.winConditionMet = gameStateStart;
-        GameManager.Instance.SetGameDuration(customGameDuration);
-        GameManager.Instance.SetGameEndDuration(customEndDuration);
-        GameManager.Instance.SetGameBeginDuration(customBeginDuration);
+        GameManager.Instance.gameDuration = customGameDuration;
+        GameManager.Instance.timeToBegin = customBeginDuration;
+        GameManager.Instance.timeToEndGame = customEndDuration;
+        //TODO: Figure out why this doesnt work
+        //GameManager.Instance.SetGameDuration(customGameDuration);
+        //GameManager.Instance.SetGameEndDuration(customEndDuration);
+        //GameManager.Instance.SetGameBeginDuration(customBeginDuration);
         GameManager.Instance.OnIntroBegin();
     }
 

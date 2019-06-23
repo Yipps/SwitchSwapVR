@@ -11,6 +11,7 @@ public class GameManager : Singleton<GameManager>{
 
 	public TextMeshProUGUI countdouwnTimerText;
 
+	public float gameDuration;
 	public float timeToBegin = 3.0f;
 	public float timeToEndGame = 3.0f;
 	public string hubName = "MinigameHub";
@@ -19,7 +20,6 @@ public class GameManager : Singleton<GameManager>{
 
 	public bool winConditionMet = false;
 
-	public float gameDuration;
 
     [Header("Events")]
 	public UnityEvent startEvents;
@@ -39,36 +39,51 @@ public class GameManager : Singleton<GameManager>{
 
     public int maxLives = 3;
     public int currentLives;
+    public int completedMinigames;
+    GameState currentGameState;
 
-    [Header("Swap Components")]
+    [Header("Minigames ")]
 
+    //Filled from hubmanager
+    public string[] minigameNames;
+    List<string> minigamesRemaining;
+
+	/*
     public int numberOfPlayers;
     int[] playerScore;
+    */
+
+
 
     void Start(){
         //OnIntroBegin();
+        currentGameState = GameState.hub;
+        //Singleton already takes care of this
+        //DontDestroyOnLoad(this);
     }
 
     void Update(){
         
     }
 
-    public void SetGameDuration(float newGameDuration = 4.0f){
+    public void SetGameDuration(float newGameDuration){
     	gameDuration = newGameDuration;
     }
 
-    public void SetGameEndDuration(float newGameDuration = 3.0f){
+    public void SetGameEndDuration(float newGameDuration){
         timeToBegin = newGameDuration;
     }
 
-    public void SetGameBeginDuration(float newGameDuration = 3.0f){
+    public void SetGameBeginDuration(float newGameDuration){
+    	Debug.Log("Time to being is now: " + newGameDuration);
         timeToEndGame = newGameDuration;
     }   
      
 
     public void OnIntroBegin(){
-    	Debug.Log("Calling On intro begin func");
+    	Debug.Log("Time to begin is: " + timeToBegin);
     	Invoke("OnGameStart",timeToBegin);
+    	currentGameState = GameState.minigame;
     }
 
     void OnGameStart(){
@@ -108,6 +123,8 @@ public class GameManager : Singleton<GameManager>{
     public void OnOutroEnd(){
     	//Time.timeScale = 1.0f;
     	Debug.Log("At this point the scene would end");
+
+    	currentGameState = GameState.hub;
     	SceneManager.LoadScene(hubName);
     }
 
@@ -145,6 +162,24 @@ public class GameManager : Singleton<GameManager>{
     	}else{
     		OnGameFailure();	
     	}
+    }
+
+    void FillList(){
+    	minigamesRemaining = new List<string>();
+    	for(int i = 0; i < minigameNames.Length; i++){
+    		minigamesRemaining.Add(minigameNames[i]);
+    	}
+    }
+
+    public string ChooseARandomGame(){
+    	if(minigamesRemaining.Count <= 0){
+    		FillList();
+    	}
+    	int randomIndex = Random.Range(0,minigamesRemaining.Count);
+    	string randomGame = minigamesRemaining[randomIndex];
+    	minigamesRemaining.RemoveAt(randomIndex);
+
+    	return randomGame;
     }
 
 }
