@@ -5,9 +5,9 @@ using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using TMPro;
 
+public enum GameState{minigame,hub};
 public class GameManager : Singleton<GameManager>{
 
-    enum GameState{minigame,hub};
 
 	public TextMeshProUGUI countdouwnTimerText;
 
@@ -40,7 +40,7 @@ public class GameManager : Singleton<GameManager>{
     public int maxLives = 3;
     public int currentLives;
     public int completedMinigames;
-    GameState currentGameState;
+    public GameState currentGameState;
 
     [Header("Minigames ")]
 
@@ -60,6 +60,8 @@ public class GameManager : Singleton<GameManager>{
         currentGameState = GameState.hub;
         //Singleton already takes care of this
         //DontDestroyOnLoad(this);
+        //for(int i = 0; i < )
+        Debug.Log("I have :"  + minigameNames.Length + " Games registered");
     }
 
     void Update(){
@@ -84,18 +86,19 @@ public class GameManager : Singleton<GameManager>{
     	Debug.Log("Time to begin is: " + timeToBegin);
     	Invoke("OnGameStart",timeToBegin);
     	currentGameState = GameState.minigame;
+        gameIsComplete = false;
     }
 
     void OnGameStart(){
     	//Debug.Log("Start your interactions here");
         Debug.Log("Game is complete is false now");
-        gameIsComplete = false;
     	startEvents.Invoke();
     	StartCoroutine(GameLoop());
     }
 
     public void OnGameSuccess(float outroDuration = 3.0f){
         if(!gameIsComplete){
+        	completedMinigames++;
             onWinEvents.Invoke();
             gameIsComplete = true;
         	OnOutroBegin();
@@ -107,6 +110,8 @@ public class GameManager : Singleton<GameManager>{
 
     public void OnGameFailure(float outroDuration = 3.0f){
         if(!gameIsComplete){
+        	currentLives--;
+
             OnLoseEvents.Invoke();
             gameIsComplete = true;
         	OnOutroBegin();
@@ -125,7 +130,12 @@ public class GameManager : Singleton<GameManager>{
     	Debug.Log("At this point the scene would end");
 
     	currentGameState = GameState.hub;
-    	SceneManager.LoadScene(hubName);
+    	if(currentLives <= 0){
+    		SceneManager.LoadScene("GameOverScene");
+    	}else{
+    		SceneManager.LoadScene(hubName);
+    	}
+
     }
 
     void OnTimeRunsOut(bool winCondition){
@@ -164,7 +174,7 @@ public class GameManager : Singleton<GameManager>{
     	}
     }
 
-    void FillList(){
+    public void FillList(){
     	minigamesRemaining = new List<string>();
     	for(int i = 0; i < minigameNames.Length; i++){
     		minigamesRemaining.Add(minigameNames[i]);
@@ -172,6 +182,12 @@ public class GameManager : Singleton<GameManager>{
     }
 
     public string ChooseARandomGame(){
+    	if(minigamesRemaining == null){
+    		//Game is being started
+    		FillList();
+    		//TODO: change this to the proper place, sometime
+    		currentLives = maxLives;
+    	}
     	if(minigamesRemaining.Count <= 0){
     		FillList();
     	}
