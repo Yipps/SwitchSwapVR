@@ -10,6 +10,7 @@ public class FlappyController : MonoBehaviour
     public float forceMult = 10;
     int keyPressed = 0;
     public float jumpStrength;
+    public float gravityFactor;
     //private float verticalInput;
 
 
@@ -42,16 +43,25 @@ public class FlappyController : MonoBehaviour
         //Change in soda positions between last frame and current frame
         deltaFlapPosition = LastFlapPosition - _Hand.transform.position;
         //Debug.Log(rb.velocity);
-        if (hasGottenRigidBody)
+        //if (hasGottenRigidBody)
+        //{
+        //    //Debug.Log("i hsve s rigid body");
+        //    //rb.AddForce(Vector3.right * forceMult);
+        //    //rb.AddForce(Vector3.up * forceMult);
+        //    print(deltaFlapPosition.magnitude);
+        //    if (deltaFlapPosition.magnitude > flapForceMin){
+
+        //        rb.AddForce(Vector3.up * jumpStrength);
+        //    }
+        //   // rb.AddForce(-Vector3.up * gravityFactor);
+
+        //}
+        if (deltaFlapPosition.magnitude > flapForceMin)
         {
-            //Debug.Log("i hsve s rigid body");
-            //rb.AddForce(Vector3.right * forceMult);
-            //rb.AddForce(Vector3.up * forceMult);
-            if (deltaFlapPosition.magnitude > flapForceMin){
-                
-                rb.AddForce(Vector3.up * jumpStrength);
-            }
+
+            rb.transform.Translate(Vector3.up*Time.deltaTime*jumpStrength);
         }
+        rb.transform.Translate(Vector3.right*Time.deltaTime*4);
         LastFlapPosition = _Hand.transform.position;
     }
 
@@ -63,6 +73,6 @@ public class FlappyController : MonoBehaviour
 
         rb.freezeRotation = true;
         rb.mass = 1;
-        rb.AddForce(Vector3.right * forceMult);
+        //rb.AddForce(Vector3.right * forceMult);
     }
 }
