@@ -10,15 +10,19 @@ public class HubManager : MonoBehaviour{
 	string nextLevelName;
 	public float timeToLoad = 1.5f;
 
+	public TextMeshProUGUI debugText;
+
 
 	void Awake(){
 		GameManager.Instance.minigameNames = minigameNames;
+		//GameManager.Instance.FillList();
 	}
 
     void Start(){
         //Pick a random game:
         nextLevelName = GameManager.Instance.ChooseARandomGame();
         StartCoroutine(LoadSceneDelayed());
+        debugText.text = "Lives: " + GameManager.Instance.currentLives + " Games: " + GameManager.Instance.completedMinigames;
     }
 
     // Update is called once per frame
@@ -29,6 +33,8 @@ public class HubManager : MonoBehaviour{
 
     IEnumerator LoadSceneDelayed(){
     	yield return new WaitForSeconds(timeToLoad);
+        GameManager.Instance.currentGameState = GameState.minigame;
         SceneManager.LoadScene(nextLevelName);
+        
     }
 }
