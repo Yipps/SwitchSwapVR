@@ -11,6 +11,7 @@ public class GameManager : Singleton<GameManager>{
 
 	public TextMeshProUGUI countdouwnTimerText;
 
+	public float gameDuration;
 	public float timeToBegin = 3.0f;
 	public float timeToEndGame = 3.0f;
 	public string hubName = "MinigameHub";
@@ -19,7 +20,6 @@ public class GameManager : Singleton<GameManager>{
 
 	public bool winConditionMet = false;
 
-	public float gameDuration;
 
     [Header("Events")]
 	public UnityEvent startEvents;
@@ -66,20 +66,22 @@ public class GameManager : Singleton<GameManager>{
         
     }
 
-    public void SetGameDuration(float newGameDuration = 4.0f){
+    public void SetGameDuration(float newGameDuration){
     	gameDuration = newGameDuration;
     }
 
-    public void SetGameEndDuration(float newGameDuration = 3.0f){
+    public void SetGameEndDuration(float newGameDuration){
         timeToBegin = newGameDuration;
     }
 
-    public void SetGameBeginDuration(float newGameDuration = 3.0f){
+    public void SetGameBeginDuration(float newGameDuration){
+    	Debug.Log("Time to being is now: " + newGameDuration);
         timeToEndGame = newGameDuration;
     }   
      
 
     public void OnIntroBegin(){
+    	Debug.Log("Time to begin is: " + timeToBegin);
     	Invoke("OnGameStart",timeToBegin);
     	currentGameState = GameState.minigame;
     }
