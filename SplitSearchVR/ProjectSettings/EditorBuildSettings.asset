@@ -30,6 +30,9 @@ EditorBuildSettings:
     path: Assets/Scenes/TVStatic.unity
     guid: d061d4b21b0af9c46bd018a1547dc35d
   - enabled: 1
+    path: Assets/Scenes/ClawMachine.unity
+    guid: f9504bc1a011caa4ea250ce9ee82012e
+  - enabled: 1
     path: Assets/Scenes/BalancingAct.unity
     guid: f4d44456fa5ff904193e546f370fa61a
   m_configObjects: {}

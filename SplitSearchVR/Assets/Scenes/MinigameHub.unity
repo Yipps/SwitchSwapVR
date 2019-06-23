@@ -1185,15 +1185,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minigameNames:
-  - Bicycle
+  - ClawMachine
   - KillingTime
   - Pinata
   - PopShaker
   - Salt
   - TVStatic
   - BalancingAct
+  - Bicycle
   timeToLoad: 5
   debugText: {fileID: 948386788}
+  switchTimer: 3
   swapText: {fileID: 860531425}
 --- !u!4 &1712673741
 Transform:
