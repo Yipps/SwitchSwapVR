@@ -6,7 +6,7 @@ public class BicycleGame : MicroScene
 {
     public GameObject obstacle;
     public Rigidbody controllerSpeed;
-
+    public float speedModifier = 2;
     //private float speed;
 
     internal bool hasPlayerHitObstacle = false;
@@ -16,7 +16,7 @@ public class BicycleGame : MicroScene
     {
         float rigidbodySpeed = controllerSpeed.velocity.magnitude;
 
-        rigidbodySpeed *= 5;
+        rigidbodySpeed *= speedModifier;
 
         if(rigidbodySpeed < 1 || hasPlayerHitObstacle)
         {
