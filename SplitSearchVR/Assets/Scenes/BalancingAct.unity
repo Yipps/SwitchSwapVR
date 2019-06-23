@@ -1263,10 +1263,11 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   gameStateStart: 1
   customGameDuration: 4
-  customBeginDuration: 3
+  customBeginDuration: 6
   customEndDuration: 3
   cratesParent: {fileID: 688861431}
   crates: []
+  cratesLeft: 0
   clips:
   - {fileID: 8300000, guid: fd0d2d1dfab49ce4580c95723155b618, type: 3}
   - {fileID: 8300000, guid: 112196afa3d49df4a9fca1537e6b104a, type: 3}
