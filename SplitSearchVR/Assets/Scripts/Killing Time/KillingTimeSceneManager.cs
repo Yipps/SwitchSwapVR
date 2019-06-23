@@ -8,6 +8,18 @@ public class KillingTimeSceneManager : MicroScene
     public Transform target;
     public Transform _RightHand;
     private Vector3 targetposition;
+    public AudioSource ExplosionSound;
+    public AudioSource GunShot;
+    public AudioSource WompWomp;
+
+    public void playWompWomp()
+    {
+        WompWomp.Play();
+    }
+    
+        
+    
+
 
 
     public void RandomTargetPlacement()
@@ -30,11 +42,13 @@ public class KillingTimeSceneManager : MicroScene
         if (OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger))
         {
             Debug.Log("Press Trigger Button");
+            GunShot.PlayOneShot(GunShot.clip);
             if (Physics.Raycast(_RightHand.position, fwd, 100))
             {
                 print("There is something in front of the object!");
                 GameManager.Instance.SetWinCondition(true);
                 GameManager.Instance.OnGameSuccess();
+                ExplosionSound.Play();
                 target.gameObject.SetActive (false);
             }
                 
