@@ -186,7 +186,7 @@ MonoBehaviour:
   customEndDuration: 3
   obstacle: {fileID: 834929811}
   controllerSpeed: {fileID: 1123047970}
-  speedModifier: 4
+  speedModifier: 5
 --- !u!4 &24568616
 Transform:
   m_ObjectHideFlags: 0
