@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class HitOther : MonoBehaviour
 {
-    BicycleGame bikeGame;
+    public BicycleGame bikeGame;
 
     IEnumerator hitObstacle()
     {
         bikeGame.hasPlayerHitObstacle = true;
+        print("HAWOIJDOAWIJDOIAWJDOIAWJIOD");
         yield return new WaitForSeconds(1f);
         bikeGame.hasPlayerHitObstacle = false;
     }
