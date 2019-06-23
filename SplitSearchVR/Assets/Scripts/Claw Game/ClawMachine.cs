@@ -55,7 +55,7 @@ public class ClawMachine : MonoBehaviour
 
             transform.position = Vector3.Slerp(transform.position, relativeDist, Time.deltaTime);
 
-            //transform.Translate(Vector3.down * Time.deltaTime * dropSpeed);
+            transform.Translate(Vector3.down * Time.deltaTime * dropSpeed);
             yield return new WaitForEndOfFrame();
         }
     }
@@ -64,8 +64,15 @@ public class ClawMachine : MonoBehaviour
     {
         if (!hasGrabbed)
         {
+            if (other.gameObject.GetComponent<OVRManager>() != null)
+            {
+                GameManager.Instance.winConditionMet = true;
+            }
+
+
             hasGrabbed = true;
-            //other.attachedRigidbody.isKinematic = true;
+            if(other.attachedRigidbody != null)
+                other.attachedRigidbody.isKinematic = true;
             other.transform.parent = transform;
             print("Grabbed " + other.name);
 
