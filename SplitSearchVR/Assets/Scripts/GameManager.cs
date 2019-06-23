@@ -41,6 +41,7 @@ public class GameManager : Singleton<GameManager>{
     public int currentLives;
     public int completedMinigames;
     public GameState currentGameState;
+    public int minigamesPlayed = 0;
 
     [Header("Minigames ")]
 
@@ -84,6 +85,7 @@ public class GameManager : Singleton<GameManager>{
 
     public void OnIntroBegin(){
     	Debug.Log("Time to begin is: " + timeToBegin);
+        minigamesPlayed++;
     	Invoke("OnGameStart",timeToBegin);
     	currentGameState = GameState.minigame;
         gameIsComplete = false;
@@ -187,6 +189,7 @@ public class GameManager : Singleton<GameManager>{
     		FillList();
     		//TODO: change this to the proper place, sometime
     		currentLives = maxLives;
+            minigamesPlayed = 0;
     	}
     	if(minigamesRemaining.Count <= 0){
     		FillList();
