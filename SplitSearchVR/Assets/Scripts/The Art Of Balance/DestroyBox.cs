@@ -19,6 +19,7 @@ public class DestroyBox : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider col){
+    	Debug.Log("Found Something");
     	if(col.tag == "Box"){
     		col.GetComponent<Box>().AttemptDestroyBox();
     	}

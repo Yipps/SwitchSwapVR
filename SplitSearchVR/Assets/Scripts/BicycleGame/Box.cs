@@ -5,7 +5,12 @@ using UnityEngine;
 public class Box : MonoBehaviour
 {
     // Start is called before the first frame update
-	bool canBeDestroyed;
+	public bool canBeDestroyed;
+	
+
+	void Awake(){
+		
+	}
 
     void Start()
     {
