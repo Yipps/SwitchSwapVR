@@ -26,7 +26,7 @@ public class KillingTimeSceneManager : MicroScene
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
 
         Debug.DrawRay(transform.position, fwd * 10);
-        if (OVRInput.Get(OVRInput.RawButton.RIndexTrigger))
+        if (OVRInput.GetDown(OVRInput.Button.Any))
         {
             if (Physics.Raycast(transform.position, fwd, 3))
             {
