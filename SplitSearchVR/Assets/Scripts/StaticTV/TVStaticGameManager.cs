@@ -28,7 +28,7 @@ public class TVStaticGameManager : MicroScene
         _StaticMaterial.SetColor("_ColorB", Color.Lerp(Color.black,Color.white, currentDirectionComparision));
         if (currentDirectionComparision > 0.90f && currentDirectionComparision < 1.1f)
         {
-            GameManager.Instance.OnGameSuccess();
+            GameManager.Instance.SetWinCondition(true);
         }
         Debug.DrawRay(_AntennaOrigin.position, _AntennaOrigin.position+correctDirection);
     }
