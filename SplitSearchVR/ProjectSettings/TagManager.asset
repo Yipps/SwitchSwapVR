@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - ExcludeTeleport
+  - TeleportIgnore
+  - Rod
+  - Box
   layers:
   - Default
   - TransparentFX
