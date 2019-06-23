@@ -20,9 +20,7 @@ public class DestroyBox : MonoBehaviour
 
     void OnTriggerEnter(Collider col){
     	if(col.tag == "Box"){
-    		Debug.Log("Whoops");
-    		cmm.OnBoxTouchedGround();
-    		Destroy(col.gameObject);
+    		col.GetComponent<Box>().AttemptDestroyBox();
     	}
     }
 }
