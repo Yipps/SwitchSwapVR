@@ -36,6 +36,8 @@ public class Salt : MonoBehaviour
     public bool isSeasoned;
     public int seasonedCount = 0;
 
+    public AudioSource shakingSound;
+
 
     // Start is called before the first frame update
     private void Start()
@@ -63,6 +65,11 @@ public class Salt : MonoBehaviour
         //If the shaking force is greater than shakeForceMin, increase totalShakeValue by shakeIncreaseAmount
         if (deltaShakePosition.magnitude > shakeForceMin)
         {
+            if (shakingSound.isPlaying == false)
+            {
+                shakingSound.Play();
+               
+            }
             OVRInput.SetControllerVibration(.5f, .5f, OVRInput.Controller.RTouch);
             print("Now we're shaking!");
             //GameObject emitter = Instantiate(particleHolder, shakePoint.transform.position, Quaternion.identity) as GameObject;
