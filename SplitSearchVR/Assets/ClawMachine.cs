@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class ClawMachine : MonoBehaviour
 {
+    public GameObject movingInput;
+
     public float dropSpeed;
     public float moveSpeed;
+
+    private float xMax = 4;
+    private float zMax = 4;
+
 
     public bool hasGrabbed;
 
@@ -27,6 +33,16 @@ public class ClawMachine : MonoBehaviour
             print("space");
             DropCrane();
         }
+
+        float remapx = Remap(movingInput.transform.position.x);
+        float remapz = Remap(movingInput.transform.position.z);
+
+        print("Remapped x: " + remapx);
+        print("Remapped z: " + remapz);
+
+        Vector3 relativeDist = new Vector3(remapx, transform.position.y, remapz);
+
+        transform.position = Vector3.Slerp(transform.position, relativeDist, Time.deltaTime);
     }
 
     IEnumerator DropCraneCoroutine()
@@ -50,10 +66,10 @@ public class ClawMachine : MonoBehaviour
             StopAllCoroutines();
 
             RaiseCrane();
-            
-            
+
+
         }
-        
+
     }
 
     public void DropCrane()
@@ -74,5 +90,12 @@ public class ClawMachine : MonoBehaviour
             transform.Translate(Vector3.up * Time.deltaTime * dropSpeed);
             yield return new WaitForEndOfFrame();
         }
+    }
+
+    float Remap(float f)
+    {
+
+        float remappedValue = f / 1 * 10 - 5;
+        return f;
     }
 }
