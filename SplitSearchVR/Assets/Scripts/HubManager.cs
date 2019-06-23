@@ -12,6 +12,7 @@ public class HubManager : MonoBehaviour{
 	public float timeToLoad = 1.5f;
 
 	public Text debugText;
+    public int switchTimer=3;
 
     public GameObject swapText;
 
@@ -31,7 +32,7 @@ public class HubManager : MonoBehaviour{
             debugText.text = debugText.text + "\nNOW SWAP!";   
         }
         */
-        if(GameManager.Instance.minigamesPlayed > 0 && GameManager.Instance.minigamesPlayed%5 == 0){
+        if(GameManager.Instance.minigamesPlayed > 0 && GameManager.Instance.minigamesPlayed%switchTimer == 0){
             swapText.SetActive(true);
         }else{
             swapText.SetActive(false);
