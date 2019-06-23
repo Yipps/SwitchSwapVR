@@ -32,7 +32,7 @@ public class ShakePop : MonoBehaviour
     void Update()
     {
         //Change in soda positions between last frame and current frame
-        deltaSodaPosition = LastSodaPosition - _Hand.transform.localPosition;
+        deltaSodaPosition = LastSodaPosition - _Hand.transform.position;
         //Debugging console log to verify change is being registered
         print(deltaSodaPosition);
 
@@ -47,7 +47,7 @@ public class ShakePop : MonoBehaviour
         print(deltaSodaPosition.magnitude);
 
         //Record value of current frame to compare to next frame
-        LastSodaPosition = _Hand.transform.localPosition;
+        LastSodaPosition = _Hand.transform.position;
     }
 
 
