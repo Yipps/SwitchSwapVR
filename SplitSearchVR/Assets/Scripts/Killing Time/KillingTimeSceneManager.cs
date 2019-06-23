@@ -13,8 +13,9 @@ public class KillingTimeSceneManager : MicroScene
     public void RandomTargetPlacement()
     {
 
-        targetposition = UnityEngine.Random.onUnitSphere * 2;
-        targetposition.y = 1;
+        //targetposition = UnityEngine.Random.onUnitSphere * 2;
+        float angle = Mathf.PI * 2f;
+        targetposition = new Vector3(Mathf.Cos(angle) * 4, 1, Mathf.Sin(angle) * 4);
         target.position = targetposition;
         target.gameObject.SetActive(true);
     }

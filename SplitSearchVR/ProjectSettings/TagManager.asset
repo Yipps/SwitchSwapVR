@@ -6,6 +6,8 @@ TagManager:
   tags:
   - obstacle
   - end
+  - Box
+  - Rod
   layers:
   - Default
   - TransparentFX
