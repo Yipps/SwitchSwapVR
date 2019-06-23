@@ -7,7 +7,7 @@ public class BalanceMicroManager : MicroScene
     // Start is called before the first frame update
 	public GameObject cratesParent;
 	public GameObject[] crates;
-	int cratesLeft;
+	public int cratesLeft;
 	AudioSource audiosourc;
 	public AudioClip[] clips;
 	public GameObject rotatingPoint;
