@@ -120,6 +120,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &29632235 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5009496080582179814, guid: 8b88a63031cdff34cb35095d40c86d98,
+    type: 3}
+  m_PrefabInstance: {fileID: 2035660312}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &709606708
 GameObject:
   m_ObjectHideFlags: 0
@@ -229,7 +235,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &960445249
 Transform:
   m_ObjectHideFlags: 0
@@ -367,6 +373,7 @@ MonoBehaviour:
   customBeginDuration: 3
   customEndDuration: 3
   target: {fileID: 960445249}
+  _RightHand: {fileID: 29632235}
 --- !u!4 &1598084994
 Transform:
   m_ObjectHideFlags: 0
@@ -482,6 +489,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610034903547971215, guid: 8b88a63031cdff34cb35095d40c86d98,
+        type: 3}
+      propertyPath: cachedSystemSDKInfo.typeName
+      value: VRTK.SDK_UnitySystem
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610034903547971215, guid: 8b88a63031cdff34cb35095d40c86d98,
+        type: 3}
+      propertyPath: cachedBoundariesSDKInfo.typeName
+      value: VRTK.SDK_UnityBoundaries
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610034903547971215, guid: 8b88a63031cdff34cb35095d40c86d98,
+        type: 3}
+      propertyPath: cachedHeadsetSDKInfo.typeName
+      value: VRTK.SDK_UnityHeadset
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610034903547971215, guid: 8b88a63031cdff34cb35095d40c86d98,
+        type: 3}
+      propertyPath: cachedControllerSDKInfo.typeName
+      value: VRTK.SDK_UnityController
       objectReference: {fileID: 0}
     - target: {fileID: 1503917525577328345, guid: 8b88a63031cdff34cb35095d40c86d98,
         type: 3}
