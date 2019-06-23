@@ -75,7 +75,7 @@ public class Salt : MonoBehaviour
             //GameObject emitter = Instantiate(particleHolder, shakePoint.transform.position, Quaternion.identity) as GameObject;
             //shake = emitter.GetComponent<ParticleSystem>();
 
-            //shake.Play();
+            shake.Play();
             progressBar.transform.localScale += new Vector3(.33f, 0, 0);
             //Destroy(emitter);
             //Destroy(shake);

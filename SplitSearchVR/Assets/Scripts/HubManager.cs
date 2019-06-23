@@ -1,5 +1,6 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,7 +11,9 @@ public class HubManager : MonoBehaviour{
 	string nextLevelName;
 	public float timeToLoad = 1.5f;
 
-	public TextMeshProUGUI debugText;
+	public Text debugText;
+
+    public GameObject swapText;
 
 
 	void Awake(){
@@ -22,7 +25,17 @@ public class HubManager : MonoBehaviour{
         //Pick a random game:
         nextLevelName = GameManager.Instance.ChooseARandomGame();
         StartCoroutine(LoadSceneDelayed());
-        debugText.text = "Lives: " + GameManager.Instance.currentLives + " Games: " + GameManager.Instance.completedMinigames;
+        debugText.text = "LIVES: " + GameManager.Instance.currentLives + " POINTS: " + GameManager.Instance.completedMinigames;
+        /*
+        if(Random.Range(0,100) > 50){
+            debugText.text = debugText.text + "\nNOW SWAP!";   
+        }
+        */
+        if(GameManager.Instance.minigamesPlayed > 0 && GameManager.Instance.minigamesPlayed%5 == 0){
+            swapText.SetActive(true);
+        }else{
+            swapText.SetActive(false);
+        }
     }
 
     // Update is called once per frame
