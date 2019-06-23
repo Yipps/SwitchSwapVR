@@ -33,6 +33,9 @@ public class ShakePop : MonoBehaviour
     public ParticleSystem success;
     public ParticleSystem failure;
 
+    public AudioSource shakingSound;
+    public AudioSource geyser;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -60,6 +63,13 @@ public class ShakePop : MonoBehaviour
         if (deltaSodaPosition.magnitude > shakeForceMin)
         {
             print("Now we're shaking!");
+            if (shakingSound.isPlaying == false)
+            {
+                shakingSound.Play();
+            }
+
+
+
             //OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.RTouch);
             totalShakeValue += shakeIncreaseAmount;
             progressBar.transform.localScale += new Vector3(.01f, 0, 0);
@@ -83,6 +93,7 @@ public class ShakePop : MonoBehaviour
             //todo trigger win animation
             print("You win!");
             success.Play();
+            geyser.Play();
             GameManager.Instance.SetWinCondition(true);
         }
         //Otherwise, they lose
@@ -91,6 +102,9 @@ public class ShakePop : MonoBehaviour
             //todo trigger lose animation
             print("You lose!");
             failure.Play();
+            geyser.Play();
+            geyser.volume = .5f;
+
             GameManager.Instance.SetWinCondition(false);
             GetComponentInChildren<ParticleSystem>().enableEmission = true;
         }
