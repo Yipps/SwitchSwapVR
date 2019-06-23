@@ -4,10 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class KillingTimeSceneManager : MicroScene
-   
-
 {
     public Transform target;
+    public Transform _RightHand;
     private Vector3 targetposition;
 
 
@@ -17,20 +16,23 @@ public class KillingTimeSceneManager : MicroScene
         targetposition = UnityEngine.Random.onUnitSphere * 2;
         targetposition.y = 1;
         target.position = targetposition;
-
+        target.gameObject.SetActive(true);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        Vector3 fwd = transform.TransformDirection(Vector3.forward);
+        OVRInput.FixedUpdate();
+        Vector3 fwd = _RightHand.TransformDirection(Vector3.forward);
 
-        Debug.DrawRay(transform.position, fwd * 10);
-        if (OVRInput.GetDown(OVRInput.Button.Any))
+        Debug.DrawRay(_RightHand.position, fwd * 10);
+        if (OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger))
         {
-            if (Physics.Raycast(transform.position, fwd, 3))
+            Debug.Log("Press Trigger Button");
+            if (Physics.Raycast(_RightHand.position, fwd, 100))
             {
                 print("There is something in front of the object!");
+                GameManager.Instance.SetWinCondition(true);
                 GameManager.Instance.OnGameSuccess();
                 target.gameObject.SetActive (false);
             }
