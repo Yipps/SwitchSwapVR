@@ -7,21 +7,26 @@ using TMPro;
 
 public class GameManager : Singleton<GameManager>{
 
+    enum GameState{minigame,hub};
+
 	public TextMeshProUGUI countdouwnTimerText;
 
+	public float gameDuration;
 	public float timeToBegin = 3.0f;
 	public float timeToEndGame = 3.0f;
-	public string hubName;
+	public string hubName = "MinigameHub";
 
 	public string hint;
 
 	public bool winConditionMet = false;
 
-	public float gameDuration;
 
+    [Header("Events")]
 	public UnityEvent startEvents;
 	public UnityEvent gameEvent;
 	public UnityEvent endEvents;
+    public UnityEvent onWinEvents;
+    public UnityEvent OnLoseEvents;
     
 
     bool gameIsComplete;
@@ -30,33 +35,68 @@ public class GameManager : Singleton<GameManager>{
 	bool judgingState = false;
 	*/
 
+    [Header ("Game Values")]
+
+    public int maxLives = 3;
+    public int currentLives;
+    public int completedMinigames;
+    GameState currentGameState;
+
+    [Header("Minigames ")]
+
+    //Filled from hubmanager
+    public string[] minigameNames;
+    List<string> minigamesRemaining;
+
+	/*
+    public int numberOfPlayers;
+    int[] playerScore;
+    */
+
+
+
     void Start(){
-        Debug.Log("Game is loaded");
-        gameIsComplete = false;
         //OnIntroBegin();
+        currentGameState = GameState.hub;
+        //Singleton already takes care of this
+        //DontDestroyOnLoad(this);
     }
 
     void Update(){
         
     }
 
-    public void SetGameDuration(float newGameDuration = 4.0f){
+    public void SetGameDuration(float newGameDuration){
     	gameDuration = newGameDuration;
     }
 
+    public void SetGameEndDuration(float newGameDuration){
+        timeToBegin = newGameDuration;
+    }
+
+    public void SetGameBeginDuration(float newGameDuration){
+    	Debug.Log("Time to being is now: " + newGameDuration);
+        timeToEndGame = newGameDuration;
+    }   
+     
+
     public void OnIntroBegin(){
-    	Debug.Log("Calling On intro begin func");
+    	Debug.Log("Time to begin is: " + timeToBegin);
     	Invoke("OnGameStart",timeToBegin);
+    	currentGameState = GameState.minigame;
     }
 
     void OnGameStart(){
-    	Debug.Log("Start your interactions here");
+    	//Debug.Log("Start your interactions here");
+        Debug.Log("Game is complete is false now");
+        gameIsComplete = false;
     	startEvents.Invoke();
     	StartCoroutine(GameLoop());
     }
 
     public void OnGameSuccess(float outroDuration = 3.0f){
         if(!gameIsComplete){
+            onWinEvents.Invoke();
             gameIsComplete = true;
         	OnOutroBegin();
         	Debug.Log("Game ends early: you win");
@@ -67,6 +107,7 @@ public class GameManager : Singleton<GameManager>{
 
     public void OnGameFailure(float outroDuration = 3.0f){
         if(!gameIsComplete){
+            OnLoseEvents.Invoke();
             gameIsComplete = true;
         	OnOutroBegin();
         	Debug.Log("Game ends early: you lose");
@@ -81,8 +122,10 @@ public class GameManager : Singleton<GameManager>{
 
     public void OnOutroEnd(){
     	//Time.timeScale = 1.0f;
-    	//SceneManager.LoadScene(hubName);
     	Debug.Log("At this point the scene would end");
+
+    	currentGameState = GameState.hub;
+    	SceneManager.LoadScene(hubName);
     }
 
     void OnTimeRunsOut(bool winCondition){
@@ -119,6 +162,24 @@ public class GameManager : Singleton<GameManager>{
     	}else{
     		OnGameFailure();	
     	}
+    }
+
+    void FillList(){
+    	minigamesRemaining = new List<string>();
+    	for(int i = 0; i < minigameNames.Length; i++){
+    		minigamesRemaining.Add(minigameNames[i]);
+    	}
+    }
+
+    public string ChooseARandomGame(){
+    	if(minigamesRemaining.Count <= 0){
+    		FillList();
+    	}
+    	int randomIndex = Random.Range(0,minigamesRemaining.Count);
+    	string randomGame = minigamesRemaining[randomIndex];
+    	minigamesRemaining.RemoveAt(randomIndex);
+
+    	return randomGame;
     }
 
 }
