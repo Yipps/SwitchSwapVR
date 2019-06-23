@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Pinata.unity
+    guid: fe9794d1cf452e041a8e69faf14338ec
   m_configObjects: {}

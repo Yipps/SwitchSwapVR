@@ -40,8 +40,10 @@ public class ShakePop : MonoBehaviour
     {
         //Change in soda positions between last frame and current frame
         deltaSodaPosition = LastSodaPosition - _Hand.transform.position;
-        //Debugging console log to verify change is being registered
-        print("Change in position: " + deltaSodaPosition + "\nMagnitude: " + deltaSodaPosition.magnitude);
+
+        //Debugging console log to verify totalshakevalue
+        print("Total shjake value: " + totalShakeValue);
+
 
         //If the shaking force is greater than shakeForceMin, increase totalShakeValue by shakeIncreaseAmount
         if (deltaSodaPosition.magnitude > shakeForceMin)
@@ -51,7 +53,7 @@ public class ShakePop : MonoBehaviour
         }
 
         //Console debug to verify magnitude is being registered
-        print(deltaSodaPosition.magnitude);
+        //print(deltaSodaPosition.magnitude);
 
         //Record value of current frame to compare to next frame
         LastSodaPosition = _Hand.transform.position;
@@ -61,6 +63,7 @@ public class ShakePop : MonoBehaviour
     //Evaluates whether the player shook the can enough
     public void EvaluateShaking()
     {
+        print("Total shake value: " +totalShakeValue);
         //If they shook it greater than the threshold they win
         if (totalShakeValue > shakeThreshold)
         {
