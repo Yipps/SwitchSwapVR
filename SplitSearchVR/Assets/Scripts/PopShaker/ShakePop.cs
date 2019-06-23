@@ -39,12 +39,14 @@ public class ShakePop : MonoBehaviour
         success.Pause();
         failure.Pause();
 
-        OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.RTouch);
+        //OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.RTouch);
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        OVRInput.SetControllerVibration(1, totalShakeValue / 500, OVRInput.Controller.RTouch);
 
         //Change in soda positions between last frame and current frame
         deltaSodaPosition = LastSodaPosition - _Hand.transform.position;
@@ -58,6 +60,7 @@ public class ShakePop : MonoBehaviour
         if (deltaSodaPosition.magnitude > shakeForceMin)
         {
             print("Now we're shaking!");
+            //OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.RTouch);
             totalShakeValue += shakeIncreaseAmount;
             progressBar.transform.localScale += new Vector3(.01f, 0, 0);
         }
