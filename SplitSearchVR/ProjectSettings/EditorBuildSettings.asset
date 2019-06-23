@@ -6,12 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/GameExample_Rod.unity
-    guid: 413e9082269dc41328d3effbf631d016
-  - enabled: 1
-    path: Assets/Scenes/GameOverScene.unity
-    guid: 70beb82c3bcaf964da4a3e7b851f7b03
-  - enabled: 1
-    path: Assets/Scenes/MinigameHub.unity
-    guid: 63282e9f9e959604c8053f20f31df41c
+    path: Assets/Scenes/Pinata.unity
+    guid: fe9794d1cf452e041a8e69faf14338ec
   m_configObjects: {}
