@@ -8,4 +8,28 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Pinata.unity
     guid: fe9794d1cf452e041a8e69faf14338ec
+  - enabled: 1
+    path: Assets/Scenes/BalancingAct.unity
+    guid: f4d44456fa5ff904193e546f370fa61a
+  - enabled: 1
+    path: Assets/Scenes/Assets.unity
+    guid: 3f7703e3963cc6b4eb56480e3415ff5a
+  - enabled: 1
+    path: Assets/Scenes/BasicCatchingGame.unity
+    guid: 6bc24f1b36563584bbcd0794f750e5fd
+  - enabled: 1
+    path: Assets/Scenes/Bicycle.unity
+    guid: f0f5e141ed474aa4eb8ae5a25f12ee09
+  - enabled: 1
+    path: Assets/Scenes/GameExample_Rod.unity
+    guid: 413e9082269dc41328d3effbf631d016
+  - enabled: 1
+    path: Assets/Scenes/GameOverScene.unity
+    guid: 70beb82c3bcaf964da4a3e7b851f7b03
+  - enabled: 1
+    path: Assets/Scenes/KillingTime.unity
+    guid: 43c70d9db0da952459fa0b860155303d
+  - enabled: 1
+    path: Assets/Scenes/MinigameHub.unity
+    guid: 63282e9f9e959604c8053f20f31df41c
   m_configObjects: {}

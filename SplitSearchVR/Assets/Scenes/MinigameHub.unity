@@ -563,7 +563,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minigameNames:
-  - GameExample_Rod
+  - BalancingAct
   timeToLoad: 5
   debugText: {fileID: 470462417}
 --- !u!4 &1712673741
